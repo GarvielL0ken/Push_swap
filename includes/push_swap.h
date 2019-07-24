@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:23:08 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/07/24 16:49:10 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/07/24 16:59:41 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void					print_err_msg(const char *err_msg, int exit_code);
 
 void					print_list(t_node *node, int mode);
 
-void					print_stacks(t_node *node1, t_node *node_2);
+void					print_stacks(t_node *node1, t_node *node_2, int mode);
 
 void					push(t_node **stack_to, t_node **stack_from);
 

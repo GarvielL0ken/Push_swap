@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:23:08 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/07/16 16:26:38 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/07/24 16:49:10 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ typedef struct			s_node
 	int					norm;
 	struct s_node		*next;
 }						t_node;
+
+int						base_case(t_node **stack_a, t_node **stack_b, int len, int mode);
+
+void					check_for_duplicates(t_node *stack);
 
 int						check_instruction(const char *str);
 
@@ -38,6 +42,8 @@ char					**initialize_arguments(int argc, char *argv[]);
 
 void					init_lists(t_node **h_a, t_node **h_b, char **arr_args);
 
+void					normalize_values(t_node **stack_a);
+
 void					print_err_msg(const char *err_msg, int exit_code);
 
 void					print_list(t_node *node, int mode);
@@ -46,11 +52,15 @@ void					print_stacks(t_node *node1, t_node *node_2);
 
 void					push(t_node **stack_to, t_node **stack_from);
 
+void					quick_sort(t_node **stack_a, t_node **stack_b, int len, int mode);
+
 char					**read_instructions(void);
 
 void					rev_rotate(t_node **head);
 
 void					rotate(t_node **head);
+
+int						stack_len(t_node *stack);
 
 void					swap(t_node **head);
 

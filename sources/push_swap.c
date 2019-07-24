@@ -6,46 +6,46 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:20:55 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/07/16 16:53:35 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/07/24 16:44:17 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		stack_len(t_node *stack)
+int		find_median(t_node *stack, int len)
 {
-	int len;
+	int i;
+	int min;
+	int max;
 
-	len = 0;
-	while (stack)
+	i = 0;
+	min = stack->norm;
+	max = stack->norm;
+	while (i < len)
 	{
-		len++;
+		if (min < stack->norm)
+			min = stack->norm;
+		if (max > stack->norm)
+			max = stack->norm;
+		i++;
 		stack = stack->next;
 	}
-	return (len);
+	return ((max + min) / 2);
 }
 
-void	normalize_values(t_node **stack_a)
+int		target_node(t_node *stack, int median, int len)
 {
-	t_node	*primary;
-	t_node	*secondary;
-	int		max;
+	int i;
 
-	max = stack_len(*stack_a) - 1;
-	printf("max = %d\n", max);
-	primary = *stack_a;
-	while (primary)
+	i = 0;
+	while (i < len && stack->next)
 	{
-		primary->norm = max;
-		secondary = *stack_a;
-		while (secondary)
-		{
-			if (primary->n < secondary->n)
-				primary->norm--;
-			secondary = secondary->next;
-		}
-		primary = primary->next;
+		if (stack->norm <= median)
+			return (i);
+		i++;
+		stack = stack->next;
 	}
+	return (-1);
 }
 
 int		main(int argc, char *argv[])
@@ -57,8 +57,8 @@ int		main(int argc, char *argv[])
 	arr_args = initialize_arguments(argc, argv);
 	validate_args(arr_args);
 	init_lists(&stack_a, &stack_b, arr_args);
-	print_list(stack_a, 0);
+	check_for_duplicates(stack_a);
 	normalize_values(&stack_a);
-	print_list(stack_a, 1);
-	sort(&stack_a, &stack_b);
+	quick_sort(&stack_a, &stack_b, stack_len(stack_a), 1);
+	print_stacks(stack_a, stack_b);
 }

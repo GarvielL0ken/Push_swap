@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:28:22 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/07/15 10:38:33 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/07/24 16:14:43 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**initialize_arguments(int argc, char *argv[])
 		arr_args++;
 	}
 	else
-		print_err_msg("Error: TOO FEW ARGUMENTS", 1);
+		print_err_msg("Error: Too few arguments", 1);
 	return (arr_args);
 }
 
@@ -56,11 +56,27 @@ void	validate_args(char **arr_args)
 		while (arr_args[i][j])
 		{
 			if (!ft_isdigit(arr_args[i][j]))
-				print_err_msg("Error: argument does not contain only digits", \
-					1);
+				print_err_msg("Error: contains non digit characters", 1);
 			j++;
 		}
 		i++;
+	}
+}
+
+void	check_for_duplicates(t_node *stack)
+{
+	t_node *compare;
+
+	while (stack->next)
+	{
+		compare = stack->next;
+		while (compare)
+		{
+			if (stack->n == compare->n)
+				print_err_msg("Error: argument duplicated", 1);
+			compare = compare->next;
+		}
+		stack = stack->next;
 	}
 }
 

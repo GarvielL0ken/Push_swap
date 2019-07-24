@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 12:29:33 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/07/16 16:13:39 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/07/24 16:42:13 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,19 @@ t_node	*create_head(int n)
 		head->next = NULL;
 	}
 	return (head);
+}
+
+int		stack_len(t_node *stack)
+{
+	int len;
+
+	len = 0;
+	while (stack)
+	{
+		len++;
+		stack = stack->next;
+	}
+	return (len);
 }
 
 void	push(t_node **stack_to, t_node **stack_from)

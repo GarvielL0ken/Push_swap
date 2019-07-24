@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 12:26:37 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/07/16 16:25:43 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/07/24 16:57:56 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,21 @@ void	print_list(t_node *node, int mode)
 	}
 }
 
-void	print_stacks(t_node *node_1, t_node *node_2)
+void	print_stacks(t_node *node_1, t_node *node_2, int mode)
 {
 	int i;
+	int n;
 
 	i = 0;
 	while (node_1 || node_2)
 	{
 		if (node_1)
 		{
-			printf("node_1[%d]->n = %d\t", i, node_1->n);
+			if (mode = 0)
+				n = node_1->n;
+			else
+				n = node_1->norm;
+			printf("node_1[%d]->n = %d\t", i, n);
 			node_1 = node_1->next;
 		}
 		else

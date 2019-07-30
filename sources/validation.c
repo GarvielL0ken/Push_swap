@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:28:22 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/07/24 16:14:43 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/07/30 13:42:59 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		check_instruction(const char *str)
 
 	i = -1;
 	arr = ft_strsplit("sa sb ss pa pb ra rb rr rra rrb rrr", ' ');
-	while (arr[++i][0] != '\0')
+	while (++i < 11)
 	{
 		if (!ft_strcmp(str, arr[i]))
 			return (1);
@@ -85,7 +85,10 @@ void	validate_results(t_node *stack_a, t_node *stack_b)
 	t_node *node;
 
 	if (!stack_a || stack_b)
-		print_err_msg("Error, stack a empty or stack b not empty", 1);
+	{
+		ft_putstr("KO\n");
+		exit(1);
+	}
 	if (!stack_a->next)
 	{
 		ft_putendl("OK");

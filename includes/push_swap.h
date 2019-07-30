@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:23:08 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/07/24 16:59:41 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/07/30 11:46:04 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,19 @@ void					print_list(t_node *node, int mode);
 
 void					print_stacks(t_node *node1, t_node *node_2, int mode);
 
-void					push(t_node **stack_to, t_node **stack_from);
+void					push(t_node **stack_to, t_node **stack_from, int mode);
 
 void					quick_sort(t_node **stack_a, t_node **stack_b, int len, int mode);
 
 char					**read_instructions(void);
 
-void					rev_rotate(t_node **head);
+void					rev_rotate(t_node **head, int mode);
 
-void					rotate(t_node **head);
+void					rotate(t_node **head, int mode);
 
 int						stack_len(t_node *stack);
 
-void					swap(t_node **head);
+void					swap(t_node **head, int mode);
 
 void					validate_args(char **arr_args);
 

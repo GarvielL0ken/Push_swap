@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:20:55 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/02 11:28:28 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/02 16:08:39 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,14 @@ void	sort_3(t_node **s_a)
 	int c;
 
 	set_3(*s_a, &a, &b, &c);
-	if (c < b && b < a) //210
+	if ((a < c && c < b) || (b < a && a < c) || (c < b && b < a))
 		swap(s_a, 1);
 	set_3(*s_a, &a, &b, &c);
-	if ((a < c && c < b) || (c < a && a < b)) //021 || 120
+	if (c < a && a < b)
 		rev_rotate(s_a, 1);
 	set_3(*s_a, &a, &b, &c);
-	if (b < a && a < c) //102
-		swap(s_a, 1);
-	set_3(*s_a, &a, &b, &c);
-	if (b < c && c < a) //201
+	if (b < c && c < a)
 		rotate(s_a, 1);
-
 }
 
 void	priority_sort(t_node **s_a, t_node **s_b, int size)
@@ -115,8 +111,8 @@ void	priority_sort(t_node **s_a, t_node **s_b, int size)
 				rotate(s_b, 2);
 			if ((*s_b)->n < (*s_b)->next->n)
 			{
-				/*(if ((*s_b)->next->n - (*s_b)->n > (*s_b)->n - stack_last(*s_b, 0))
-					rotate(s_b, 2);*/
+				if ((*s_b)->next->n - (*s_b)->n > (*s_b)->n - stack_last(*s_b, 0))
+					rotate(s_b, 2);
 				if ((*s_a)->next->n < stack_last(*s_a, 0) && (*s_a)->next->n < (*s_a)->n)
 					ss = 3;
 				if (ss == 3)
@@ -137,8 +133,8 @@ void	priority_sort(t_node **s_a, t_node **s_b, int size)
 	}
 	if (stack_len(*s_b) >= 2)
 	{
-		/*if ((*s_b)->next->n - (*s_b)->n > (*s_b)->n - stack_last(*s_b, 0))
-			rotate(s_b, 2);*/
+		if ((*s_b)->next->n - (*s_b)->n > (*s_b)->n - stack_last(*s_b, 0))
+			rotate(s_b, 2);
 		if ((*s_b)->n < stack_last(*s_b, 0))
 			rotate(s_b, 2);
 		if ((*s_b)->n < (*s_b)->next->n)
@@ -153,9 +149,60 @@ void	priority_sort(t_node **s_a, t_node **s_b, int size)
 	}
 }
 
+//DECLARATION
+/*
+ * int low
+ * int high
+ * int i
+ *
+ * low = -1;
+ * high = -1;
+ * while (s)
+ * {
+ * 		if (low < range && low == -1)
+ * 			low = i;
+ * 		else if (max < range)
+ * 			max = i;
+ * 		i++;
+ * 		s = s->next;
+ * }
+ * 	
+*/
+
+int		num_rots(t_node *s)
+{
+	int max;
+	int n;
+	int i;
+
+	max = s->norm;
+	i = 0;
+	n = 0;
+	while (s)
+	{
+		if (s->norm > max)
+		{
+			max = s->norm;
+			n = i;
+		}
+		s = s->next;
+		i++;
+	}
+	i--;
+	//printf("max = %d\ni = %d\n", max, i);
+	if (i - n < n && n != 0)
+ 		return (n - i - 1);
+	else if (n > 0)
+		return (n - 1);
+	else
+		return (0);
+}
+
 void	selection_sort(t_node **s_a, t_node **s_b, int size)
 {
 	int ss;
+	int rots;
+
 	while (size)
 	{
 		ss = 0;
@@ -178,12 +225,52 @@ void	selection_sort(t_node **s_a, t_node **s_b, int size)
 			ft_putstr("sb\n");
 		else if (ss == 3)
 			ft_putstr("ss\n");
+		rots = num_rots(*s_b);
+		//printf("rots = %d\n", rots);
+		while (rots)
+		{
+			if (rots < 0)
+			{
+				rev_rotate(s_b, 2);
+				rots++;
+			}
+			else
+			{
+				rotate(s_b, 2);
+				rots--;
+			}
+		}
+		//print_stacks(*s_a, *s_b, 0);
+		ss = 0;
+		if ((*s_b)->next)
+		{
+			if ((*s_b)->n < (*s_b)->next->n)
+			{
+				swap(s_b, 0);
+				ss += 2;
+			}
+		}
+		if ((*s_a)->next->n < (*s_a)->n)
+		{
+			swap(s_a, 0);
+			ss++;
+		}
+		if (ss == 1)
+			ft_putstr("sa\n");
+		else if (ss == 2)
+			ft_putstr("sb\n");
+		else if (ss == 3)
+			ft_putstr("ss\n");
+		//print_stacks(*s_a, *s_b, 0);
+		push(s_a, s_b, 1);
+		size--;
+		//print_stacks(*s_a, *s_b, 0);
+
 		//print_stacks(*s_a, *s_b, 0);
 		//if (ss == 0)
 		//	printf("\n");
-		push(s_a, s_b, 1);
+		//push(s_a, s_b, 1);
 		//print_stacks(*s_a, *s_b, 0);
-		size--;
 	}
 	if ((*s_a)->next->n < (*s_a)->n)
 			swap(s_a, 1);
@@ -239,5 +326,5 @@ int		main(int argc, char *argv[])
 		push(&stack_a, &stack_b, 1);
 	}*/
 	//print_stacks(stack_a, stack_b, 0);
-	printf("initial_cost = %d\ncost = %d\n", initial_cost, cost(stack_a));
+	//printf("initial_cost = %d\ncost = %d\n", initial_cost, cost(stack_a));
 }

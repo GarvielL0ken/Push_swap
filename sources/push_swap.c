@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:20:55 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/02 16:08:39 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/06 14:28:06 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,47 +33,6 @@ int sorted(t_node *stack_a)
 	return (1);
 }
 
-int		find_nearest(t_node *s_a, int max, int size)
-{
-	int i;
-	int first;
-	int last;
-
-	first = -1;
-	last = -1;
-	i = -1;
-	if (s_a->norm < max || s_a->next->norm < max || stack_last(s_a, 1) < max)
-		return (0);
-	while (s_a)
-	{
-		if (s_a->n < max && first == -1)
-			first = i;
-		else if (s_a->n < max)
-			last = i;
-		i++;
-		s_a = s_a->next;
-	}
-	last = size - last - 2;
-	if (first < last)
-		return (first);
-	else if (first == -1)
-		return (0);
-	else
-		return (-last);
-	printf("size = %d\nfirst = %d\nlast = %d\nsize - last - 2 = %d\n", size, first, last, size - last - 2);
-}
-
-int		less_than_max(t_node *s, int max)
-{
-	while (s)
-	{
-		if (s->norm < max)
-			return (1);
-		s = s->next;
-	}
-	return (0);
-}
-
 void	set_3(t_node *s_a, int *a, int *b, int *c)
 {
 	*a = s_a->norm;
@@ -98,12 +57,79 @@ void	sort_3(t_node **s_a)
 		rotate(s_a, 1);
 }
 
+int		nearest(t_node *s, int u_b)
+{
+	int i;
+	int first;
+	int last;
+	int len;
+
+	if (s->norm < u_b || s->next->norm < u_b || stack_last(s, 1) < u_b)
+		return (0);
+	i = 0;
+	first = -1;
+	last = -1;
+	len = stack_len(s);
+	while (s)
+	{
+		if (s->norm < u_b && first == -1)
+			first = i;
+		if (s->norm < u_b)
+			last = i;
+		s = s->next;
+		i++;
+	}
+	first--;
+	last = (len - last - 1);
+	//printf("len = %d\nfirst = %d\nlast = %d\n", len, first, last);
+	if (first <= last)
+		return (first);
+	else
+		return (last * (-1));
+	return (1);
+}
+
+int		set_upper_bound(t_node *s, int u_b, int r)
+{
+	while (s)
+	{
+		if (s->norm < u_b)
+			return (u_b);
+		s = s->next;
+	}
+	u_b += r;
+	return (u_b);
+}
+
 void	priority_sort(t_node **s_a, t_node **s_b, int size)
 {
 	int ss;
+	int range;
+	int upper_bound;
+	int rots;
 
+	upper_bound = (stack_len(*s_a) < 100) ? RANGE_LOW : RANGE_HIGH;
+	range = upper_bound;
 	while (size > 3)
 	{
+		//print_stacks(*s_a, *s_b, 1);
+		upper_bound = set_upper_bound(*s_a, upper_bound, range);
+		//printf("upper_bound = %d\n", upper_bound);
+		rots = nearest(*s_a, upper_bound);
+		//printf("rots = %d\n", rots);
+		while (rots)
+		{
+			if (rots > 0)
+			{
+				rotate(s_a, 1);
+				rots--;
+			}
+			else
+			{
+				rev_rotate(s_a, 1);
+				rots++;
+			}
+		}
 		ss = 1;
 		if (stack_len(*s_b) >= 2)
 		{

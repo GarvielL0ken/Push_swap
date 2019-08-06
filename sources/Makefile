@@ -6,14 +6,14 @@
 #    By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/09 11:42:07 by jsarkis           #+#    #+#              #
-#    Updated: 2019/07/30 16:26:52 by jsarkis          ###   ########.fr        #
+#    Updated: 2019/08/06 14:26:41 by jsarkis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CHKR = checker
 PSHSWP = push_swap
-HEADER = push_swap.h
+HEADER = ../includes/push_swap.h
 
 CFLAGS = -Wall -Werror -Wextra
 LINK = -L./libft -lft
@@ -25,17 +25,18 @@ SRCS = debug.c \
 	   node_functions.c \
 	   read_instructions.c \
 	   validation.c
+
 LIB = libft/libft.a
 
-all: $(LIB) $(PSHSWP) $(CHKR) 
+all: $(LIB) $(PSHSWP) $(CHKR) $(HEADER) 
 
 $(LIB):
 	make -C libft
 
-$(PSHSWP): push_swap.c $(SRCS)
+$(PSHSWP): push_swap.c $(SRCS) $(HEADER)
 	gcc $(CFLAGS) push_swap.c $(SRCS) $(LINK) -o $(PSHSWP)
 
-$(CHKR): checker.c $(SRCS)
+$(CHKR): checker.c $(SRCS) $(HEADER)
 	gcc $(CFLAGS) checker.c $(SRCS) $(LINK) -o $(CHKR)
 
 fclean:

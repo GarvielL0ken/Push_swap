@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:23:08 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/07/30 11:46:04 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/06 15:09:37 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PUSH_SWAP_H
 # include "../sources/libft/libft.h"
 # include <stdio.h>
+# define RANGE_LOW 10
+# define RANGE_HIGH 32
 
 typedef struct			s_node
 {

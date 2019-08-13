@@ -1,30 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   sort_3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/08 16:34:03 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/13 12:16:06 by jsarkis          ###   ########.fr       */
+/*   Created: 2019/08/13 10:35:03 by jsarkis           #+#    #+#             */
+/*   Updated: 2019/08/13 10:45:54 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		main(int argc, char *argv[])
+void	set_3(t_node *s, int *a, int *b, int *c)
 {
-	t_node	*stack_a;
-	t_node	*stack_b;
-	char	**arr_arguments;
-	char	**arr_instructions;
+	*a = s->norm;
+	*b = s->next->norm;
+	*c = s->next->next->norm;
+}
 
-	arr_arguments = initialize_arguments(argc, argv);
-	validate_args(arr_arguments);
-	init_lists(&stack_a, &stack_b, arr_arguments);
-	check_for_duplicates(stack_a);
-	arr_instructions = read_instructions();
-	execute_all_cmds(arr_instructions, &stack_a, &stack_b);
-	validate_results(stack_a, stack_b);
-	ft_putendl("OK");
+void	sort_3(t_node **s)
+{
+	int a;
+	int b;
+	int c;
+
+	set_3(*s, &a, &b, &c);
+	if ((a < c && c < b) || (b < a && a < c) || (c < b && b < a))
+	{
+		swap(s, 1);
+		set_3(*s, &a, &b, &c);
+	}
+	if (c < a && a < b)
+	{
+		rev_rotate(s, 1);
+		set_3(*s, &a, &b, &c);
+	}
+	if (b < c && c < a)
+		rotate(s, 1);
 }

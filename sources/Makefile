@@ -6,7 +6,7 @@
 #    By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/09 11:42:07 by jsarkis           #+#    #+#              #
-#    Updated: 2019/08/06 14:26:41 by jsarkis          ###   ########.fr        #
+#    Updated: 2019/08/13 11:41:57 by jsarkis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,16 @@ SRCS = debug.c \
 	   execution.c \
 	   init_lists.c \
 	   initialization.c \
+	   nearest.c \
 	   node_functions.c \
+	   priority_sort.c \
 	   read_instructions.c \
-	   validation.c
+	   selection_sort.c \
+	   sort_3.c \
+	   sorted.c \
+	   stack_last.c \
+	   validation.c \
+	   
 
 LIB = libft/libft.a
 

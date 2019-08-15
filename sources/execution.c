@@ -6,11 +6,20 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 13:01:47 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/13 14:15:49 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/15 15:31:06 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+#include <sys/ioctl.h>
+
+size_t	get_tw(void)
+{
+	struct winsize	w;
+
+	ioctl(0, TIOCGWINSZ, &w);
+	return (w.ws_col);
+}
 
 void	draw_box_char(int c)
 {
@@ -43,7 +52,10 @@ int		max(t_node *a, t_node *b)
 {
 	int max;
 
-	max = a->n;
+	if (a)
+		max = a->n;
+	else if (b)
+		max = b->n;
 	while (a || b)
 	{
 		if (a)
@@ -64,88 +76,127 @@ int		max(t_node *a, t_node *b)
 
 int		width(int n)
 {
-	int width;
+	int w;
 
-	width = 1;
-	while (n)
+	w = 1;
+	while (n >= 10)
 	{
-		if (n >= 10)
-		{
-			n /= 10;
-			width++;
-		}
-		else
-			n = 0;
+		n /= 10;
+		w++;
 	}
-	return (width);
+	return (w);
+}
+
+int		max_width(t_node *a, t_node *b)
+{
+	int n;
+
+	n = max(a, b);
+	return (width(n));
+}
+
+void	print_border(int w, int mode)
+{
+	int i;
+
+	if (!mode)
+		draw_box_char(TL);
+	else
+		draw_box_char(BL);
+	i = 0;
+	while (i < (w * 2) + 4)
+	{
+		draw_box_char(H);
+		if (i == w + 1 && !mode)
+			draw_box_char(TM);
+		else if (i == w + 1)
+			draw_box_char(BM);
+		i++;
+	}
+	if (!mode)
+		draw_box_char(TR);
+	else
+		draw_box_char(BR);
+	ft_putchar('\n');
+}
+
+void	print_elem(int w, t_node *s)
+{
+	int i;
+
+	i = 0;
+	while (i < w + 2)
+	{
+		if (s)
+		{
+			if (w - width(s->n) < i)
+			{
+				ft_putnbr(s->n);
+				i += width(s->n);
+			}
+		}
+		ft_putchar(' ');
+		i++;
+	}
+	draw_box_char(V);
+}
+
+void	debug(t_node *a, t_node *b)
+{
+	int w;
+
+	w = max_width(a, b);
+	print_border(w, 0);
+	while (a || b)
+	{
+		draw_box_char(V);
+		print_elem(w, a);
+		print_elem(w, b);
+		ft_putchar('\n');
+		if (a)
+			a = a->next;
+		if (b)
+			b = b->next;
+	}
+	print_border(w, 1);
+}
+
+void	draw_line(t_node *s, int w)
+{
+	int i;
+
+	ft_putchar(' ');
+	i = 0;
+	if (s)
+	{
+		while (i++ <= (s)->n)
+			draw_box_char(B);
+	}
+	else
+		i++;
+	while (i++ <= w + 1)
+		ft_putchar(' ');
+	draw_box_char(V);
 }
 
 void	draw(t_node *a, t_node *b)
 {
-	int i;
 	int w;
 
-	i = 1;
-	w = width(max(a, b)) * 2;
-	printf("width = %d\n", w);
-	draw_box_char(0x250c);
-	draw_box_char(0x2500);
-	while (i <= w)
-	{
-		draw_box_char(0x2500);
-		if (w / 2 == i)
-		{
-			draw_box_char(0x2500);
-			draw_box_char(0x252c);
-			draw_box_char(0x2500);
-		}
-		i++;
-	}
-	draw_box_char(0x2500);
-	draw_box_char(0x2510);
-	ft_putchar('\n');
+	w = max(a, b) + 1;
+	print_border(w, 0);
 	while (a || b)
 	{
-		draw_box_char(0x2502);
-		ft_putchar(' ');
+		draw_box_char(V);
+		draw_line(a, w);
+		draw_line(b, w);
 		if (a)
-		{
-			ft_putnbr(a->n);
 			a = a->next;
-		}
-		else
-			ft_putchar(' ');
-		ft_putchar(' ');
-		draw_box_char(0x2502);
-		ft_putchar(' ');
 		if (b)
-		{
-			ft_putnbr(b->n);
 			b = b->next;
-		}
-		else
-			ft_putchar(' ');
-		ft_putchar(' ');
-		draw_box_char(0x2502);
 		ft_putchar('\n');
 	}
-	i = 1;
-	draw_box_char(0x2514);
-	draw_box_char(0x2500);
-	while (i <= w)
-	{
-		draw_box_char(0x2500);
-		if (w / 2 == i)
-		{
-			draw_box_char(0x2500);
-			draw_box_char(0x2534);
-			draw_box_char(0x2500);
-		}
-		i++;
-	}
-	draw_box_char(0x2500);
-	draw_box_char(0x2518);
-	ft_putchar('\n');
+	print_border(w, 1);
 }
 
 void	execute_all_cmds(char **arr, t_node **s_a, t_node **s_b)
@@ -158,6 +209,8 @@ void	execute_all_cmds(char **arr, t_node **s_a, t_node **s_b)
 		execute_cmd(arr[i], s_a, s_b);
 		ft_putendl(arr[i]);
 		draw(*s_a, *s_b);
+		//debug(*s_a, *s_b);
+		ft_putchar('\n');
 	}
 }
 

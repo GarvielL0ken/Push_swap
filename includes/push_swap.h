@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:23:08 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/13 12:15:33 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/15 14:42:13 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 # define PUSH_SWAP_H
 # include "../sources/libft/libft.h"
 # include <stdio.h>
-# define H '─'
-# define V '│'
-# define TL '┌'
-# define TR '┐'
-# define BL '└'
-# define BR '┘'
+# define H 0x2500
+# define V 0x2502
+# define TL 0x250c
+# define TR 0x2510
+# define BL 0x2514
+# define BR 0x2518
+# define TM 0x252c
+# define BM 0x2534
+# define B 0x2580
+# define KRED "\033[31m"
+# define KGREEN "\033[32m"
 # define RANGE_LOW 32
 # define RANGE_HIGH 32
 

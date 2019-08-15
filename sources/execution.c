@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 13:01:47 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/15 15:31:06 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/15 17:11:06 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,9 @@ void	draw(t_node *a, t_node *b)
 		ft_putchar('\n');
 	}
 	print_border(w, 1);
+	usleep(50000);
+	printf("\e[1;1H\e[2J");
+	fflush(stdout);
 }
 
 void	execute_all_cmds(char **arr, t_node **s_a, t_node **s_b)

@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:23:08 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/15 14:42:13 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/21 13:46:45 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 # include "../sources/libft/libft.h"
 # include <stdio.h>
+# define EXIT_CODE 1
 # define H 0x2500
 # define V 0x2502
 # define TL 0x250c
@@ -23,6 +24,7 @@
 # define TM 0x252c
 # define BM 0x2534
 # define B 0x2580
+# define KRESET "\033[0m"
 # define KRED "\033[31m"
 # define KGREEN "\033[32m"
 # define RANGE_LOW 32
@@ -35,9 +37,21 @@ typedef struct			s_node
 	struct s_node		*next;
 }						t_node;
 
+typedef struct			s_flag
+{
+	int					print_cmd_count;
+	int					cmd_count;
+	int					debug;
+	int					dtld_err_msg;
+	int					exit_code;
+	int					help;
+	int					invalid;
+	int					vis;
+}						t_flag;
+
 int						base_case(t_node **stack_a, t_node **stack_b, int len, int mode);
 
-void					check_for_duplicates(t_node *stack);
+void					check_for_duplicates(t_node *stack, t_flag flags);
 
 int						check_instruction(const char *str);
 
@@ -61,7 +75,7 @@ void					normalize_values(t_node **stack_a);
 
 int						num_rots(t_node *s);
 
-void					print_err_msg(const char *err_msg, int exit_code);
+void					print_err_msg(const char *err_msg, t_flag flags);
 
 void					print_list(t_node *node, int mode);
 
@@ -95,7 +109,7 @@ int						stack_len(t_node *stack);
 
 void					swap(t_node **head, int mode);
 
-void					validate_args(char **arr_args);
+void					validate_args(char **arr_args, t_flag flags);
 
 void					validate_results(t_node *stack_a, t_node *stack_b);
 #endif

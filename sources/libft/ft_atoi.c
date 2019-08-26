@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:39:28 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/06/14 16:00:45 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/26 18:23:14 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,10 @@ static int	ft_loop_for_atoi(const char *str, int i, int negative)
 int			ft_atoi(const char *str)
 {
 	int		i;
-	int		valid;
 	int		negative;
 
 	negative = 1;
 	i = 0;
-	valid = 1;
 	while (ft_is_white_space(str[i]))
 		i++;
 	if (str[i] == '-')

@@ -22,7 +22,14 @@ int		check_instruction(const char *str)
 	while (++i < 11)
 	{
 		if (!ft_strcmp(str, arr[i]))
+		{
+			while (*arr)
+			{
+				free(*arr);
+				arr++;
+			}
 			return (1);
+		}
 	}
 	return (0);
 }

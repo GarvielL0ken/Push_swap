@@ -17,6 +17,7 @@ char	**read_instructions(t_flag flags)
 	char	**arr_instructions;
 	char	*str_1;
 	char	*str_2;
+	char	*tmp;
 	int		i;
 
 	i = 0;
@@ -28,8 +29,12 @@ char	**read_instructions(t_flag flags)
 			break ;
 		if (!check_instruction(str_1))
 			print_err_msg("Error, Instruction Invalid", flags);
+		tmp = str_2;
 		str_2 = ft_strjoin(str_2, str_1);
+		free(tmp);
+		tmp = str_2;
 		str_2 = ft_strjoin(str_2, " ");
+		free(tmp);
 	}
 	arr_instructions = ft_strsplit(str_2, ' ');
 	return (arr_instructions);

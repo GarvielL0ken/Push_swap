@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   flags.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/21 10:58:35 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/21 13:54:05 by jsarkis          ###   ########.fr       */
+/*   Created: 2019/08/26 10:13:12 by jsarkis           #+#    #+#             */
+/*   Updated: 2019/08/26 10:15:26 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-void	print_err_msg(const char *err_msg, t_flag flags)
-{
-	if (flags.dtld_err_msg)
-		ft_putendl_fd(err_msg, 2);
-	else
-		ft_putendl_fd("Error", 2);
-	exit(flags.exit_code);
-}
 
 t_flag	init_flags(void)
 {
@@ -78,35 +69,4 @@ t_flag	set_flags(char **arr_args)
 		i++;
 	}
 	return (flags);
-}
-
-void	display_help(void)
-{
-	ft_putendl("Options/flags:");
-	ft_putendl("	-c : Print number of instructions after a list is "
-			"successfully sorted");
-	ft_putendl("	-d : Debug mode, prints the stacks normalized values after"
-			" each instruction");
-	ft_putendl("	-e : Displays detailed error messages");
-	ft_putendl("	-h : You got here didn't you? It's for this help text");
-	ft_putendl("	-v : Visualize both stacks after each instruction");
-}
-
-int main(int argc, char *argv[])
-{
-	char 	**arr_args;
-	t_flag	flags;
-
-	arr_args = initialize_arguments(argc, argv);
-	flags = set_flags(arr_args);
-	if (flags.invalid)
-		ft_putendl(KRED "Invalid option" KRESET);
-	if (flags.help)
-		display_help();
-	else
-	{
-		validate_args(arr_args, flags);
-	}
-	//validate_args(arr_args, flags)
-	//printf("valid\n");
 }

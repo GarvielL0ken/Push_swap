@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:28:22 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/07/30 13:42:59 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/26 14:40:01 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,43 +27,36 @@ int		check_instruction(const char *str)
 	return (0);
 }
 
-char	**initialize_arguments(int argc, char *argv[])
-{
-	char **arr_args;
-
-	arr_args = NULL;
-	if (argc == 2)
-		arr_args = ft_strsplit(argv[1], ' ');
-	else if (argc > 2)
-	{
-		arr_args = argv;
-		arr_args++;
-	}
-	else
-		print_err_msg("Error: Too few arguments", 1);
-	return (arr_args);
-}
-
-void	validate_args(char **arr_args)
+void	validate_args(char **arr_args, t_flag flags)
 {
 	int	i;
 	int	j;
 
 	i = 0;
+	if (arr_args[0][0] == '-')
+		print_err_msg("Error: invalid syntax, use -h to see syntax", flags);
 	while (arr_args[i])
 	{
+		if (arr_args[i][0] == '-')
+			break ;
 		j = 0;
 		while (arr_args[i][j])
 		{
-			if (!ft_isdigit(arr_args[i][j]))
-				print_err_msg("Error: contains non digit characters", 1);
+			if (!ft_isdigit(arr_args[i][j]) && arr_args[i][j] != ' ')
+				print_err_msg("Error: contains non digit characters", flags);
 			j++;
 		}
 		i++;
 	}
+	while (arr_args[i])
+	{
+		if (arr_args[i][0] != '-')
+			print_err_msg("Error: invalid syntax, use -h to see syntax", flags);
+		i++;
+	}
 }
 
-void	check_for_duplicates(t_node *stack)
+void	check_for_duplicates(t_node *stack, t_flag flags)
 {
 	t_node *compare;
 
@@ -73,7 +66,7 @@ void	check_for_duplicates(t_node *stack)
 		while (compare)
 		{
 			if (stack->n == compare->n)
-				print_err_msg("Error: argument duplicated", 1);
+				print_err_msg("Error: argument duplicated", flags);
 			compare = compare->next;
 		}
 		stack = stack->next;

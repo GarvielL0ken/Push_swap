@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 11:03:05 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/13 11:04:56 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/26 14:18:52 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,39 @@ int		num_rots(t_node *s)
 		return (0);
 }
 
-void	selection_sort(t_node **s_a, t_node **s_b, int size)
+void	sorting_logic(t_node **s_a, t_node **s_b)
 {
 	int ss;
+
+	ss = 0;
+	if ((*s_b)->next)
+	{
+		if ((*s_b)->n < (*s_b)->next->n)
+		{
+			swap(s_b, 0);
+			ss += 2;
+		}
+	}
+	if ((*s_a)->next->n < (*s_a)->n)
+	{
+		swap(s_a, 0);
+		ss++;
+	}
+	if (ss == 1)
+		ft_putstr("sa\n");
+	else if (ss == 2)
+		ft_putstr("sb\n");
+	else if (ss == 3)
+		ft_putstr("ss\n");
+}
+
+void	selection_sort(t_node **s_a, t_node **s_b, int size)
+{
 	int rots;
 
 	while (size)
 	{
-		ss = 0;
-		if ((*s_b)->next)
-		{
-			if ((*s_b)->n < (*s_b)->next->n)
-			{
-				swap(s_b, 0);
-				ss += 2;
-			}
-		}
-		if ((*s_a)->next->n < (*s_a)->n)
-		{
-			swap(s_a, 0);
-			ss++;
-		}
-		if (ss == 1)
-			ft_putstr("sa\n");
-		else if (ss == 2)
-			ft_putstr("sb\n");
-		else if (ss == 3)
-			ft_putstr("ss\n");
+		sorting_logic(s_a, s_b);
 		rots = num_rots(*s_b);
 		while (rots)
 		{
@@ -81,26 +87,7 @@ void	selection_sort(t_node **s_a, t_node **s_b, int size)
 				rots--;
 			}
 		}
-		ss = 0;
-		if ((*s_b)->next)
-		{
-			if ((*s_b)->n < (*s_b)->next->n)
-			{
-				swap(s_b, 0);
-				ss += 2;
-			}
-		}
-		if ((*s_a)->next->n < (*s_a)->n)
-		{
-			swap(s_a, 0);
-			ss++;
-		}
-		if (ss == 1)
-			ft_putstr("sa\n");
-		else if (ss == 2)
-			ft_putstr("sb\n");
-		else if (ss == 3)
-			ft_putstr("ss\n");
+		sorting_logic(s_a, s_b);
 		push(s_a, s_b, 1);
 		size--;
 	}

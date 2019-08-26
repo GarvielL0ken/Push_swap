@@ -6,13 +6,13 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 09:41:23 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/07/30 13:42:00 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/26 10:36:13 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-char	**read_instructions(void)
+char	**read_instructions(t_flag flags)
 {
 	char	**arr_instructions;
 	char	*str_1;
@@ -27,7 +27,7 @@ char	**read_instructions(void)
 		if (str_1[0] == '\0')
 			break ;
 		if (!check_instruction(str_1))
-			print_err_msg("Error, Instruction Invalid", 1);
+			print_err_msg("Error, Instruction Invalid", flags);
 		str_2 = ft_strjoin(str_2, str_1);
 		str_2 = ft_strjoin(str_2, " ");
 	}

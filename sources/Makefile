@@ -6,7 +6,7 @@
 #    By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/09 11:42:07 by jsarkis           #+#    #+#              #
-#    Updated: 2019/08/15 14:15:39 by jsarkis          ###   ########.fr        #
+#    Updated: 2019/08/26 14:38:37 by jsarkis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,13 @@ HEADER = ../includes/push_swap.h
 
 CFLAGS = -Wall -Werror -Wextra
 LINK = -L./libft -lft
-SRCS = debug.c \
+SRCS = commands.c \
+	   debug.c \
+	   display_help.c \
+	   draw.c \
 	   error_handling.c \
 	   execution.c \
+	   flags.c \
 	   init_lists.c \
 	   initialization.c \
 	   nearest.c \

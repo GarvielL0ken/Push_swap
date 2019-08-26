@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 16:43:48 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/07/24 16:50:07 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/26 14:39:51 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,23 @@ void	normalize_values(t_node **stack_a)
 		}
 		primary = primary->next;
 	}
+}
+
+char	**initialize_arguments(int argc, char *argv[])
+{
+	char	**arr_args;
+	t_flag	flags;
+
+	arr_args = NULL;
+	flags.dtld_err_msg = 2;
+	if (argc == 2)
+		arr_args = ft_strsplit(argv[1], ' ');
+	else if (argc > 2)
+	{
+		arr_args = argv;
+		arr_args++;
+	}
+	else
+		print_err_msg("", flags);
+	return (arr_args);
 }

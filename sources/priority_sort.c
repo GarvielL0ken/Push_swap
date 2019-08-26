@@ -6,7 +6,7 @@
 /*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 10:54:30 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/13 11:42:36 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/26 13:37:58 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,12 @@ void	priority_sort(t_node **s_a, t_node **s_b, int size)
 	int upper_bound;
 	int rots;
 
-	upper_bound = (stack_len(*s_a) < 100) ? RANGE_LOW : RANGE_HIGH;
+	upper_bound = (stack_len(*s_a) <= 100) ? RANGE_LOW : RANGE_HIGH;
 	range = upper_bound;
 	while (size > 3)
 	{
+		if (sorted(*s_a))
+			break ;
 		upper_bound = set_upper_bound(*s_a, upper_bound, range);
 		rots = nearest(*s_a, upper_bound);
 		ss = rot_and_swap(s_a, s_b, rots);

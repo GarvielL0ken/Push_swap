@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_lists.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jsarkis <jsarkis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 10:25:50 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/26 14:02:29 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/27 09:58:59 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,12 @@ char	*init_s(char **arr_args, int *i)
 
 void	next_node(char *s, t_flag flags, t_node **node)
 {
-	max_int(next_int(s), flags);
-	(*node)->next = create_head(ft_atoi(next_int(s)));
+	char *tmp;
+
+	tmp = next_int(s);
+	max_int(tmp, flags);
+	(*node)->next = create_head(ft_atoi(tmp));
+	free(tmp);
 	*node = (*node)->next;
 }
 
@@ -69,8 +73,10 @@ void	init_lists(t_node **h_a, t_node **h_b, char **arr_args, t_flag flags)
 	char	*s;
 	int		i;
 
-	max_int(next_int(arr_args[0]), flags);
-	*h_a = create_head(ft_atoi(next_int(arr_args[0])));
+	s = next_int(arr_args[0]);
+	max_int(s, flags);
+	*h_a = create_head(ft_atoi(s));
+	free(s);
 	node = *h_a;
 	s = init_s(arr_args, &i);
 	while (arr_args[i])

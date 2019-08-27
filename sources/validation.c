@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jsarkis <jsarkis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:28:22 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/26 14:40:01 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/27 13:17:38 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,20 @@
 int		check_instruction(const char *str)
 {
 	char	**arr;
+	int		found;
 	int		i;
 
+	found = 0;
 	i = -1;
 	arr = ft_strsplit("sa sb ss pa pb ra rb rr rra rrb rrr", ' ');
-	while (++i < 11)
+	while (++i < 11 && !found)
 	{
 		if (!ft_strcmp(str, arr[i]))
-		{
-			while (*arr)
-			{
-				free(*arr);
-				arr++;
-			}
-			return (1);
-		}
+			found = 1;
 	}
-	return (0);
+	i = 0;
+	free_arr(arr);
+	return (found);
 }
 
 void	validate_args(char **arr_args, t_flag flags)

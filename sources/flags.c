@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flags.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jsarkis <jsarkis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 10:13:12 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/26 10:15:26 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/27 15:03:00 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,12 @@ t_flag	set_flags(char **arr_args)
 		i++;
 	}
 	return (flags);
+}
+
+void	check_flags(t_flag flags)
+{
+	if (flags.invalid)
+		ft_putendl(KRED "INVALID OPTION" KRESET);
+	if (flags.help)
+		display_help();
 }

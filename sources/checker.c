@@ -6,7 +6,7 @@
 /*   By: jsarkis <jsarkis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 16:34:03 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/27 11:03:12 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/27 14:59:48 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ int		main(int argc, char *argv[])
 		init_lists(&stack_a, &stack_b, arr_args, flags);
 		check_for_duplicates(stack_a, flags);
 		normalize_values(&stack_a);
-		arr_instructions = read_instructions(flags);
+		read_instructions(flags, &arr_instructions);
 		flags = execute_all_cmds(arr_instructions, &stack_a, &stack_b, flags);
+		free_arr(arr_instructions);
 		validate_results(stack_a, stack_b);
 		ft_putendl("OK");
 		if (flags.print_cmd_count)

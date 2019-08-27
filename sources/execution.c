@@ -6,7 +6,7 @@
 /*   By: jsarkis <jsarkis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 13:01:47 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/27 11:03:38 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/27 13:16:38 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,7 @@ void	execute_cmd(char const *cmd, t_node **s_a, t_node **s_b)
 		}
 		i++;
 	}
-	i = 0;
-	while (i < 12)
-	{
-		free(arr_cmds[i]);
-		i++;
-	}
-	free(arr_cmds);
+	free_arr(arr_cmds);
 }
 
 void	execute_cmd_cases(int i, t_node **s_a, t_node **s_b)

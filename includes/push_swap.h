@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jsarkis <jsarkis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:23:08 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/26 14:43:52 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/27 15:03:41 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct			s_flag
 	int					vis;
 }						t_flag;
 
+void					check_flags(t_flag flags);
+
 void					check_for_duplicates(t_node *stack, t_flag flags);
 
 int						check_instruction(const char *str);
@@ -73,6 +75,8 @@ void					execute_cmd(char const *cmd, t_node **s_a, \
 
 void					execute_cmd_cases(int i, t_node **s_a, t_node **s_b);
 
+void					free_arr(char **arr);
+
 char					**initialize_arguments(int argc, char *argv[]);
 
 t_flag					init_flags(void);
@@ -96,7 +100,7 @@ void					priority_sort(t_node **s_a, t_node **s_b, int size);
 
 void					push(t_node **stack_to, t_node **stack_from, int mode);
 
-char					**read_instructions(t_flag flags);
+void					read_instructions(t_flag flags, char ***arr);
 
 void					rev_rotate(t_node **head, int mode);
 

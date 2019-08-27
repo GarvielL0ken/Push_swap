@@ -6,7 +6,7 @@
 /*   By: jsarkis <jsarkis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 16:34:03 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/27 10:08:14 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/27 11:03:12 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@ int		main(int argc, char *argv[])
 		ft_putendl("OK");
 		if (flags.print_cmd_count)
 			display_cmd_count(flags.cmd_count);
-		free(stack_a);
 	}
 }

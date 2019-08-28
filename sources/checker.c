@@ -22,10 +22,8 @@ int		main(int argc, char *argv[])
 
 	arr_args = initialize_arguments(argc, argv);
 	flags = set_flags(arr_args);
-	if (flags.invalid)
-		ft_putendl(KRED "INVALID OPTION" KRESET);
 	if (flags.help)
-		display_help();
+		check_flags(flags);
 	else
 	{
 		validate_args(arr_args, flags);

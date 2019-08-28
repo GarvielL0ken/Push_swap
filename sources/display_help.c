@@ -21,7 +21,7 @@ void	display_help(void)
 	ft_putendl("	space separated integers and single strings ");
 	ft_putendl("	for example 1 2 3, \"1 2 3\", \"1 2\" 3 are all valid");
 	ft_putendl("");
-	ft_putendl("1	Flags must begin with a '-'\n");
+	ft_putendl("	Flags must begin with a '-'\n");
 	ft_putendl("Options/flags:");
 	ft_putendl("	-c : Print number of instructions after a list is "
 			"successfully sorted");

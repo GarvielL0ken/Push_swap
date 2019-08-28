@@ -40,10 +40,15 @@ int		max(t_node *a, t_node *b)
 
 int		max_width(t_node *a, t_node *b)
 {
-	int n;
+	int i;
+	int j;
 
-	n = max(a, b);
-	return (width(n));
+	i = max(a, b);
+	j = min(a, b);
+	if (width(i) > width(j))
+		return (width(i));
+	else
+		return (width(j));
 }
 
 void	print_border(int w, int mode)

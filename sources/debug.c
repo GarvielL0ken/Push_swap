@@ -72,6 +72,11 @@ int		width(int n)
 	int w;
 
 	w = 1;
+	if (n < 0)
+	{
+		n *= -1;
+		w++;
+	}
 	while (n >= 10)
 	{
 		n /= 10;

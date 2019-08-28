@@ -57,7 +57,7 @@ t_flag	set_flags(char **arr_args)
 	flags = init_flags();
 	while (arr_args[i])
 	{
-		if (arr_args[i][0] == '-')
+		if (arr_args[i][0] == '-' && ft_isalpha(arr_args[i][1]))
 		{
 			j = 1;
 			while (arr_args[i][j])

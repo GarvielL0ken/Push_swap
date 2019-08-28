@@ -81,7 +81,7 @@ void	init_lists(t_node **h_a, t_node **h_b, char **arr_args, t_flag flags)
 	node = *h_a;
 	while (arr_args[i])
 	{
-		if (arr_args[i][0] == '-')
+		if (arr_args[i][0] == '-' && ft_isalpha(arr_args[i][1]))
 			break ;
 		while (ft_find_index(s, ' ') != -1)
 		{

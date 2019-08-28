@@ -6,7 +6,7 @@
 #    By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/09 11:42:07 by jsarkis           #+#    #+#              #
-#    Updated: 2019/08/26 14:38:37 by jsarkis          ###   ########.fr        #
+#    Updated: 2019/08/28 13:08:40 by jsarkis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS = commands.c \
 	   flags.c \
 	   init_lists.c \
 	   initialization.c \
+	   min.c \
 	   nearest.c \
 	   node_functions.c \
 	   priority_sort.c \

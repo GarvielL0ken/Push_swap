@@ -6,7 +6,7 @@
 /*   By: jsarkis <jsarkis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:28:22 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/27 13:17:38 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/08/28 13:17:37 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,36 @@ int		check_instruction(const char *str)
 	return (found);
 }
 
+int		in_s(char c, const char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (c == s[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	validate_args(char **arr_args, t_flag flags)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	if (arr_args[0][0] == '-')
+	if (arr_args[0][0] == '-' && ft_isalpha(arr_args[0][1]))
 		print_err_msg("Error: invalid syntax, use -h to see syntax", flags);
 	while (arr_args[i])
 	{
-		if (arr_args[i][0] == '-')
+		if (arr_args[i][0] == '-' && ft_isalpha(arr_args[i][1]))
 			break ;
 		j = 0;
 		while (arr_args[i][j])
 		{
-			if (!ft_isdigit(arr_args[i][j]) && arr_args[i][j] != ' ')
+			if (!ft_isdigit(arr_args[i][j]) && !in_s(arr_args[i][j], " -"))
 				print_err_msg("Error: contains non digit characters", flags);
 			j++;
 		}

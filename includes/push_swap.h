@@ -86,6 +86,8 @@ void					init_lists(t_node **h_a, t_node **h_b, char **arr_args,\
 
 int						max_width(t_node *a, t_node *b);
 
+int						min(t_node *a, t_node *b);
+
 int						nearest(t_node *s, int u_b);
 
 void					normalize_values(t_node **stack_a);

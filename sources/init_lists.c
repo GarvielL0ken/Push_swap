@@ -36,10 +36,14 @@ void	max_int(char *s, t_flag flags)
 		print_err_msg("Error: integer larger than int max", flags);
 }
 
-char	*init_s(char **arr_args, int *i)
+char	*init_s(char **arr_args, int *i, t_flag flags, t_node **h_a)
 {
 	char *s;
 
+	s = next_int(arr_args[0]);
+	max_int(s, flags);
+	*h_a = create_head(ft_atoi(s));
+	free(s);
 	*i = 0;
 	s = arr_args[0];
 	if (ft_find_index(s, ' ') == -1)
@@ -73,12 +77,8 @@ void	init_lists(t_node **h_a, t_node **h_b, char **arr_args, t_flag flags)
 	char	*s;
 	int		i;
 
-	s = next_int(arr_args[0]);
-	max_int(s, flags);
-	*h_a = create_head(ft_atoi(s));
-	free(s);
+	s = init_s(arr_args, &i, flags, h_a);
 	node = *h_a;
-	s = init_s(arr_args, &i);
 	while (arr_args[i])
 	{
 		if (arr_args[i][0] == '-')

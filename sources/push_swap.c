@@ -6,7 +6,7 @@
 /*   By: jsarkis <jsarkis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:20:55 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/27 09:59:44 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/10/08 22:01:46 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ int		main(int argc, char *argv[])
 	init_lists(&stack_a, &stack_b, arr_args, flags);
 	check_for_duplicates(stack_a, flags);
 	normalize_values(&stack_a);
+	masobot(&stack_a);
 	if (!sorted(stack_a))
-	{
-		priority_sort(&stack_a, &stack_b, stack_len(stack_a));
-		selection_sort(&stack_a, &stack_b, stack_len(stack_b));
+	{	
+		/*priority_sort(&stack_a, &stack_b, stack_len(stack_a));
+		selection_sort(&stack_a, &stack_b, stack_len(stack_b));*/
 	}
 }

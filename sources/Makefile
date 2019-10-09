@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jsarkis <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: jsarkis <jsarkis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/09 11:42:07 by jsarkis           #+#    #+#              #
-#    Updated: 2019/08/28 13:08:40 by jsarkis          ###   ########.fr        #
+#    Updated: 2019/10/08 22:03:07 by jsarkis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS = commands.c \
 	   sorted.c \
 	   stack_last.c \
 	   validation.c \
+	   masobot.c
 	   
 
 LIB = libft/libft.a
@@ -163,7 +164,7 @@ t32:
 t33:
 	./push_swap 3 2 1 0 | ./checker 3 2 1 0
 
-test_1-3: t1 t2 t3 t4 t5 t6 t7 t8 t9
+test_3: t4 t5 t6 t7 t8 t9
 
 test_4: t10 t11 t12 t13 t14 t15 t16 t17 t18 t19 t20 t21 t22 t23 t24 t25 t26 t27 t28 t29 t30 t31 t32 t33
 

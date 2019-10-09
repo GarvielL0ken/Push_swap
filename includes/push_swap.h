@@ -6,13 +6,14 @@
 /*   By: jsarkis <jsarkis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:23:08 by jsarkis           #+#    #+#             */
-/*   Updated: 2019/08/27 15:03:41 by jsarkis          ###   ########.fr       */
+/*   Updated: 2019/10/08 21:57:16 by jsarkis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "../sources/libft/libft.h"
+# include "masobot.h"
 # include <stdio.h>
 # define EXIT_CODE 1
 # define MAX_INT "2147483647"
@@ -48,6 +49,8 @@ typedef struct			s_flag
 	int					invalid;
 	int					vis;
 }						t_flag;
+
+void    masobot(t_node **stack_a);
 
 void					check_flags(t_flag flags);
 
